@@ -9,10 +9,10 @@
  */
 size_t binary_tree_size(const binary_tree_t *tree)
 {
-    if (tree == NULL)
-        return (0);
+	if (tree == NULL)
+		return (0);
 
-    return (1 + binary_tree_size(tree->left) + binary_tree_size(tree->right));
+	return (1 + binary_tree_size(tree->left) + binary_tree_size(tree->right));
 }
 
 /**
@@ -22,25 +22,25 @@ size_t binary_tree_size(const binary_tree_t *tree)
  */
 void heapify(heap_t *node)
 {
-    heap_t *largest = node;
+	heap_t *largest = node;
 
-    if (node == NULL)
-        return;
+	if (node == NULL)
+		return;
 
-    if (node->left != NULL && node->left->n > largest->n)
-        largest = node->left;
+	if (node->left != NULL && node->left->n > largest->n)
+		largest = node->left;
 
-    if (node->right != NULL && node->right->n > largest->n)
-        largest = node->right;
+	if (node->right != NULL && node->right->n > largest->n)
+		largest = node->right;
 
-    if (largest != node)
-    {
-        int tmp = node->n;
+	if (largest != node)
+	{
+		int tmp = node->n;
 
-        node->n = largest->n;
-        largest->n = tmp;
-        heapify(largest);
-    }
+		node->n = largest->n;
+		largest->n = tmp;
+		heapify(largest);
+	}
 }
 
 /**
@@ -53,43 +53,43 @@ void heapify(heap_t *node)
  */
 heap_t *heap_insert(heap_t **root, int value)
 {
-    heap_t *node, *parent;
-    int tmp;
+	heap_t *node, *parent;
+	int tmp;
 
-    if (root == NULL)
-        return (NULL);
+	if (root == NULL)
+		return (NULL);
 
-    node = binary_tree_node(NULL, value);
-    if (node == NULL)
-        return (NULL);
+	node = binary_tree_node(NULL, value);
+	if (node == NULL)
+		return (NULL);
 
-    if (*root == NULL)
-    {
-        *root = node;
-        return (node);
-    }
+	if (*root == NULL)
+	{
+		*root = node;
+		return (node);
+	}
 
-    parent = *root;
-    while (parent->left != NULL || parent->right != NULL)
-    {
-        if (binary_tree_size(parent->left) <= binary_tree_size(parent->right))
-            parent = parent->left;
-        else
-            parent = parent->right;
-    }
+	parent = *root;
+	while (parent->left != NULL || parent->right != NULL)
+	{
+		if (binary_tree_size(parent->left) <= binary_tree_size(parent->right))
+			parent = parent->left;
+		else
+			parent = parent->right;
+	}
 
-    if (parent->left == NULL)
-        parent->left = node;
-    else
-        parent->right = node;
+	if (parent->left == NULL)
+		parent->left = node;
+	else
+		parent->right = node;
 
-    while (node->parent != NULL && node->n > node->parent->n)
-    {
-        tmp = node->n;
-        node->n = node->parent->n;
-        node->parent->n = tmp;
-        node = node->parent;
-    }
+	while (node->parent != NULL && node->n > node->parent->n)
+	{
+		tmp = node->n;
+		node->n = node->parent->n;
+		node->parent->n = tmp;
+		node = node->parent;
+	}
 
-    return (node);
+	return (node);
 }
