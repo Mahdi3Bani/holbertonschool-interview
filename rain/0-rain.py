@@ -1,7 +1,8 @@
 #!/usr/bin/python3
-
+'''comment'''
 
 def rain(walls):
+    """comment"""
 
     n = len(walls)
   
